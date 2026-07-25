@@ -14,14 +14,19 @@ import java.util.Optional;
 @Service
 public class BorrowService {
 
-    @Autowired
-    private BorrowRecordRepository borrowRepository;
+    private final BorrowRecordRepository borrowRepository;
+    private final BookRepository bookRepository;
+    private final UserRepository userRepository;
 
+    // To avoid field injection
     @Autowired
-    private BookRepository bookRepository;
-
-    @Autowired
-    private UserRepository userRepository;
+    public BorrowService(BorrowRecordRepository borrowRepository,
+                         BookRepository bookRepository,
+                         UserRepository userRepository) {
+        this.borrowRepository = borrowRepository;
+        this.bookRepository = bookRepository;
+        this.userRepository = userRepository;
+    }
 
     // Borrowing a book. This is assuming user has clicked on the book
     public BorrowRecord borrowBook(Long bookId, Long borrowerId) {
@@ -62,8 +67,10 @@ public class BorrowService {
         }
 
         BorrowRecord record = recordOpt.get();
-        record.setStatus(BorrowStatus.ACTIVE); //Active one a user accepts to lend
+        record.setStatus(BorrowStatus.ACTIVE); //Active once a user accepts to lend
 
         return borrowRepository.save(record);
     }
 }
+
+//TODO: Try write tests for these
