@@ -7,6 +7,7 @@ import java.util.List;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByOwnerId(Long ownerId);
+    List<Book> findByAvailableTrue();
 }
 
 //Dont forget jparepo methods:

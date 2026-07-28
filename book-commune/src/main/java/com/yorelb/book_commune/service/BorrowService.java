@@ -68,9 +68,10 @@ public class BorrowService {
 
         BorrowRecord record = recordOpt.get();
         record.setStatus(BorrowStatus.ACTIVE); //Active once a user accepts to lend
-
+        Book borrowedBook = record.getBook();
+        borrowedBook.setAvailability(false);
+        bookRepository.save(borrowedBook);
         return borrowRepository.save(record);
     }
 }
-
 //TODO: Try write tests for these

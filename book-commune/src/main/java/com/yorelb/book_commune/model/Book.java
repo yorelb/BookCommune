@@ -13,6 +13,7 @@ public class Book {
     private String author;
     private String isbn;
     private String description;
+    private boolean available = true;
 
     @Enumerated(EnumType.STRING)
     private Condition condition;
@@ -79,5 +80,13 @@ public class Book {
 
     public void setCondition (Condition condition) {
         this.condition = condition;
+    }
+
+    public boolean getAvailability() {
+        return available;
+    }
+
+    public void setAvailability(boolean available) {
+        this.available = available;
     }
 }
