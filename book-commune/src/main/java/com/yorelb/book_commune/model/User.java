@@ -11,8 +11,19 @@ public class User {
     private Long id;
 
     private String name;
-    private String email;
     private String address;
+
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    @Column(unique = true, nullable = false)
+    private String username;
+
+    @Column(nullable = false)
+    private String password; //TODO: Hash password for security
+
+    //TODO: Change to enum
+    private String role = "USER";
 
     // can own many books
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
@@ -55,4 +66,16 @@ public class User {
     public void setAddress (String address) {
         this.address = address;
     }
+
+    public String getUsername() {return username;}
+
+    public void setUsername(String username) {this.username = username;}
+
+    public String getPassword() {return password;}
+
+    public void setPassword(String password) {this.password = password;}
+
+    public void setRole(String role) {this.role = role;}
+
+    public String getRole() {return role;}
 }
