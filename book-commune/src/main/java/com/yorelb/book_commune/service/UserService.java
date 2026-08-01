@@ -7,6 +7,7 @@ import com.yorelb.book_commune.repository.BookRepository;
 import com.yorelb.book_commune.repository.BorrowRecordRepository;
 import com.yorelb.book_commune.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,19 +21,26 @@ public class UserService {
     private final BorrowRecordRepository borrowRepository;
     private final BookRepository bookRepository;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserService(BorrowRecordRepository borrowRepository,
-                         BookRepository bookRepository,
-                         UserRepository userRepository) {
+                       BookRepository bookRepository,
+                       UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.borrowRepository = borrowRepository;
         this.bookRepository = bookRepository;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     //Add a user to the db
-    public User addUser (User newUser) {
-       return userRepository.save(newUser);
+    public User addUser(User user) {
+        //Encrypt before save
+        String plainTextPassword = user.getPassword();
+        String encryptedPassword = passwordEncoder.encode(plainTextPassword);
+        user.setPassword(encryptedPassword);
+
+        return userRepository.save(user);
     }
 
     //Edit user details
