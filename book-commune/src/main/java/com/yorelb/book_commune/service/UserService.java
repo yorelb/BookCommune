@@ -72,4 +72,16 @@ public class UserService {
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }
+
+    // a user trying to log in
+    public User verifyLogin(String username, String rawPassword) {
+        User userToLogin = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid username or password."));
+
+        if (!passwordEncoder.matches(rawPassword, userToLogin.getPassword())) {
+            throw new IllegalArgumentException("Invalid username or password.");
+        }
+
+        return userToLogin;
+    }
 }

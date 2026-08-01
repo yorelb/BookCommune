@@ -1,10 +1,10 @@
 package com.yorelb.book_commune.controller;
 
+import com.yorelb.book_commune.dto.LoginRequest;
 import com.yorelb.book_commune.model.User;
-import com.yorelb.book_commune.model.User;
-import com.yorelb.book_commune.service.UserService;
 import com.yorelb.book_commune.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -69,6 +69,21 @@ public class UserController {
             return ResponseEntity.ok().build();
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    // Logging in
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        try {
+            User loggedInUser = userService.verifyLogin(
+                    loginRequest.getUsername(),
+                    loginRequest.getPassword()
+            );
+
+            return ResponseEntity.ok(loggedInUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
     }
 }
