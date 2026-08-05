@@ -1,135 +1,206 @@
+
+/*Site colours*/
+:root {
+    --first: #659287;
+    --background-color: #E6F2DD;
+    --second: #88BDA4;
+    --third: #B1D3B9;
+    --fourth: #ebf3e5;
+}
+
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: #ffffff;
-    height: 100vh;
-    width: 100vw;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+    min-height: 100vh;
+    color: var(--first);
 }
 
-.logo {
-    position: absolute;
-    top: 40px;
-    left: 50px;
-    font-family: 'Delius', cursive;
-    font-size: 48px;
-    font-weight: 700;
-    color: #000000;
-    letter-spacing: -1px;
-}
-
-.bg-book {
-    position: absolute;
-    font-size: 45px;
-    user-select: none;
-    z-index: -1;
-    filter: drop-shadow(2px 4px 2px rgba(0,0,0,0.1));
-}
-
-.b1 { top: 15%; left: 10%; transform: rotate(-20deg); }
-.b2 { top: 20%; left: 22%; transform: rotate(15deg); }
-.b3 { top: 5%; left: 50%; transform: rotate(25deg); }
-.b4 { top: 10%; left: 60%; transform: rotate(-15deg); }
-.b5 { top: 20%; right: 12%; transform: rotate(-10deg); }
-.b6 { top: 50%; left: 12%; transform: rotate(15deg); }
-.b7 { top: 50%; right: 12%; transform: rotate(-20deg); }
-.b8 { bottom: 18%; left: 8%; transform: rotate(-10deg); }
-.b9 { bottom: 12%; left: 30%; transform: rotate(20deg); }
-.b10 { bottom: 15%; right: 35%; transform: rotate(-15deg); }
-.b11 { bottom: 10%; right: 8%; transform: rotate(15deg); }
-
-.login-card {
-    background-color: #f2f2f2;
-    width: 550px;
-    border-radius: 25px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.tabs-header {
-    display: flex;
-    width: 100%;
-    border-bottom: 4px solid #000000;
-}
-
-.tab {
+/* Left side */
+.split-left {
     flex: 1;
-    text-align: center;
-    padding: 25px 0;
-    font-size: 32px;
-    font-weight: 700;
-    cursor: pointer;
-    color: #000000;
+    background: repeating-linear-gradient(
+            -35deg,
+            var(--first),
+            var(--first),
+            var(--fourth),
+            var(--fourth)
+    );
 }
 
-.tab.active {
-    border-right: 4px solid #000000;
-}
-
-.form-content {
-    padding: 40px 60px 50px 60px;
+/* Right Side */
+.split-right {
+    flex: 1;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--fourth);
+    padding: 2rem;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.brand h1 {
+    font-size: 3.5rem;
+    font-family: 'Chewy', cursive;
+    font-weight: 700;
+    color: var(--first);
+}
+
+.welcome-text {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--second);
+    margin-bottom: 2.5rem;
 }
 
 .input-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 25px;
-}
-
-.input-group label {
-    font-size: 18px;
-    margin-bottom: 8px;
-    color: #1a1a1a;
+    margin-bottom: 1.25rem;
 }
 
 .input-group input {
-    background-color: #d9d9d9;
-    border: none;
-    height: 45px;
-    padding: 0 15px;
-    font-size: 16px;
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: var(--first);
     outline: none;
+    transition: border-color 0.2s;
 }
 
-.forgot-password {
-    align-self: flex-end;
-    color: #5b73ff;
+.input-group input::placeholder {
+    color: var(--first);
+}
+
+.input-group input:focus {
+    border-color: var(--first);
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--second);
+    cursor: pointer;
+}
+
+.remember-me input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--first);
+    cursor: pointer;
+}
+
+.reset-link {
+    color: var(--second);
     text-decoration: none;
-    font-size: 14px;
-    font-weight: 700;
-    margin-top: -15px;
-    margin-bottom: 30px;
+    font-weight: 600;
 }
 
-.forgot-password:hover {
-    text-decoration: underline;
-}
-
-.login-btn {
-    background-color: #5b73ff;
+.btn-primary {
+    width: 100%;
+    padding: 0.85rem;
+    background-color: var(--first);
     color: #ffffff;
     border: none;
-    padding: 12px 0;
-    font-size: 18px;
-    font-weight: 700;
-    width: 160px;
-    align-self: center;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: opacity 0.2s;
+    margin-bottom: 1rem;
+    transition: background-color 0.2s;
 }
 
-.login-btn:hover {
-    opacity: 0.9;
+.btn-primary:hover {
+    background-color: var(--second);
+}
+
+.signup-text {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--second);
+    margin-bottom: 2rem;
+}
+
+.signup-text a {
+    color: var(--first);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #999;
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.divider span {
+    padding: 0 15px;
+}
+
+.btn-social {
+    width: 100%;
+    padding: 0.85rem;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--first);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+    transition: background-color 0.2s;
+}
+
+.btn-social:hover {
+    background-color: #f7f7f7;
+}
+
+.btn-social svg {
+    width: 18px;
+    height: 18px;
+}
+
+@media (max-width: 768px) {
+    .split-left {
+        display: none;
+    }
 }
