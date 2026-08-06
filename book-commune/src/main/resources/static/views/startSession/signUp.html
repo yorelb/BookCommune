@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Sign in </title>
+    <title> Sign up </title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Delius&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/loginStyles.css">
+    <link rel="stylesheet" href="../../css/loginStyles.css">
 </head>
 <body>
 
@@ -24,9 +24,19 @@
             <h1>BookCommune</h1>
         </div>
 
-        <p class="welcome-text">Welcome back!</p>
+        <p class="welcome-text">Join the commune today!</p>
 
         <form action="#">
+
+            <div class="input-row">
+                <div class="input-group">
+                    <input type="text" placeholder="First Name" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" placeholder="Last Name" required>
+                </div>
+            </div>
+
             <div class="input-group">
                 <input type="email" placeholder="Name@email.com" required>
             </div>
@@ -35,18 +45,21 @@
                 <input type="password" placeholder="Password" required>
             </div>
 
-            <div class="form-options">
-                <label class="remember-me">
-                    <input type="checkbox">
-                    Remember me
-                </label>
-                <a href="#" class="reset-link">Reset password</a>
+            <div class="input-group">
+                <input type="password" placeholder="Confirm Password" required>
             </div>
 
-            <button type="submit" class="btn-primary">Sign in</button>
+            <div class="form-options">
+                <label class="remember-me">
+                    <input type="checkbox" required>
+                    I agree to the Terms & Conditions
+                </label>
+            </div>
+
+            <button type="submit" class="btn-primary">Create Account</button>
         </form>
 
-        <p class="signup-text">Don't have an account? <a href="#">Sign up</a></p>
+        <p class="signup-text">Already have an account? <a href="login.html">Sign in</a></p>
 
         <div class="divider">
             <span>or</span>
