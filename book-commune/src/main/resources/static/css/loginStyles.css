@@ -199,6 +199,16 @@ body {
     height: 18px;
 }
 
+/* Side-by-side inputs for Sign Up page */
+.input-row {
+    display: flex;
+    gap: 15px;
+}
+
+.input-row .input-group {
+    flex: 1;
+}
+
 @media (max-width: 768px) {
     .split-left {
         display: none;
