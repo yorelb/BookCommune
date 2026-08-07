@@ -10,9 +10,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String address;
-
     @Column(unique = true, nullable = false)
     private String email;
 
@@ -20,10 +17,14 @@ public class User {
     private String username;
 
     @Column(nullable = false)
-    private String password; //TODO: Hash password for security
+    private String password;
 
-    //TODO: Change to enum
-    private String role = "USER";
+    private String name;
+    private String address;
+    private String bio;
+    private Role role = Role.COMMUNITY_MEMBER;
+
+    // Relationships
 
     // can own many books
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
@@ -33,15 +34,15 @@ public class User {
     @OneToMany(mappedBy = "borrower", cascade = CascadeType.ALL)
     private List<BorrowRecord> borrowRecords;
 
+    // Getters and Setters
+
     public User() {}
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) { this.id = id; }
 
     public String getName() {
         return name;
@@ -75,7 +76,11 @@ public class User {
 
     public void setPassword(String password) {this.password = password;}
 
-    public void setRole(String role) {this.role = role;}
+    public void setRole(Role role) {this.role = role;}
 
-    public String getRole() {return role;}
+    public Role getRole() {return role;}
+
+    public void setBio(String bio) {this.bio = bio;}
+
+    public String getBio() {return bio;}
 }
