@@ -199,7 +199,7 @@ body {
     height: 18px;
 }
 
-/* Side-by-side inputs for Sign Up page */
+
 .input-row {
     display: flex;
     gap: 15px;
@@ -207,6 +207,22 @@ body {
 
 .input-row .input-group {
     flex: 1;
+}
+
+#signUpAlert {
+    display: none;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+#loginAlert {
+    display: none;
+    color: var(--first);
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
 }
 
 @media (max-width: 768px) {
