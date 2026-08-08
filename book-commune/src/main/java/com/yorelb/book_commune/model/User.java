@@ -19,7 +19,8 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    private String name;
+    private String forename;
+    private String surname;
     private String address;
     private String bio;
     private Role role = Role.COMMUNITY_MEMBER;
@@ -45,12 +46,12 @@ public class User {
     public void setId(Long id) { this.id = id; }
 
     public String getName() {
-        return name;
+        return forename + " " + surname;
     }
 
-    public void setName (String name) {
-        this.name = name;
-    }
+    public void setForename (String forename) { this.forename = forename; }
+
+    public void setSurname (String surname) { this.surname = surname; }
 
     public String getEmail() {
         return email;

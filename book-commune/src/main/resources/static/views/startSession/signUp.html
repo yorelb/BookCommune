@@ -108,7 +108,8 @@
         }
 
         const userPayload = {
-            name: firstName + " " + lastName,
+            forename: firstName.charAt(0).toUpperCase() + firstName.slice(1).trim(),
+            surname: lastName.charAt(0).toUpperCase() + lastName.slice(1).trim(),
             email: email,
             username: email,
             password: password
