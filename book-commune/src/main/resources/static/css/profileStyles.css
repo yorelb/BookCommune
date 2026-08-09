@@ -45,6 +45,10 @@ body {
     color: var(--first);
 }
 
+#navbar-placeholder {
+    display: contents;
+}
+
 .active-box {
     background-color: var(--first);
     color: var(--fourth);
