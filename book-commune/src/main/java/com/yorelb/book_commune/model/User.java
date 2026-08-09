@@ -1,6 +1,7 @@
 package com.yorelb.book_commune.model;
 import jakarta.persistence.*;
 import java.util.List;
+import java.util.Locale;
 
 @Entity
 @Table(name = "users")
@@ -84,4 +85,18 @@ public class User {
     public void setBio(String bio) {this.bio = bio;}
 
     public String getBio() {return bio;}
+
+    private String roleToString (Role role) {
+        String roleInString = " ";
+        String [] roleInStringBits = role.toString().split("_");
+        for (int n = 0; n < roleInStringBits.length; n++) {
+            roleInStringBits[n] = roleInStringBits[n].substring(0,1).toUpperCase() + roleInStringBits[n].substring(1).toLowerCase();
+            roleInString = roleInString + " " + roleInStringBits[n];
+        }
+        return roleInString.trim();
+    }
+
+    public String getRoleName() {
+        return roleToString(this.role);
+    }
 }

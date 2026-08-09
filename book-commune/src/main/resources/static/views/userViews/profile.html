@@ -13,7 +13,6 @@
 <body>
 
 <!--TODO - sidebar MOVE TO ITS OWN FILE SO CAN BE USED FOR OTHER PAGES -->
-<!--TODO - Make a to string for the enum of role-->
 <!--TODO - MAKE EDIT PROFILE -->
 <!--TODO - Make books lent and borrowed by counting in the borrow table-->
 <!--TODO - Separate first and last name, trim and capitalise them-->
@@ -105,7 +104,7 @@
         document.getElementById('profileEmail').textContent = user.email || 'No email provided';
         document.getElementById('profileAddress').textContent = user.address || 'Location unknown';
         document.getElementById('profileBio').textContent = user.bio || 'This user has not written a bio yet.';
-        document.getElementById('profileRole').textContent = user.role || 'Member';
+        document.getElementById('profileRole').textContent = user.roleName || 'Member';
     });
 </script>
 </html>
