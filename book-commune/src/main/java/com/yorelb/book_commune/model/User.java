@@ -25,6 +25,8 @@ public class User {
     private String address;
     private String bio;
     private Role role = Role.COMMUNITY_MEMBER;
+    // Using link "simulates" storing image elsewhere and using link to access
+    private String profileImageUrl;
 
     // Relationships
 
@@ -85,6 +87,10 @@ public class User {
     public void setBio(String bio) {this.bio = bio;}
 
     public String getBio() {return bio;}
+
+    public String getProfileImageUrl() { return profileImageUrl; }
+
+    public void setProfileImageUrl(String profileImageUrl) { this.profileImageUrl = profileImageUrl; }
 
     private String roleToString (Role role) {
         String roleInString = " ";
