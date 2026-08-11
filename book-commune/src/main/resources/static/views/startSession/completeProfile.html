@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Complete Profile | BookCommune </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Delius&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/loginStyles.css">
+</head>
+<body>
+
+<!-- Left side -->
+<div class="split-left"></div>
+
+<!-- Right side -->
+<div class="split-right">
+    <div class="form-container">
+
+        <div class="brand">
+            <h1>BookCommune</h1>
+        </div>
+
+        <p class="welcome-text">One last step! Tell us where you are lending from.</p>
+
+        <form id="onboardingForm">
+            <div id="onboardingAlert" style="display: none; margin-bottom: 1rem; text-align: center; font-size: 0.9rem; font-weight: 600;"></div>
+
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Choose a username (e.g., Bookworm99)" required>
+            </div>
+
+            <div class="input-group">
+                <input type="text" id="address" placeholder="City & Country (e.g., Sheffield, UK)" required>
+            </div>
+
+            <div class="input-group">
+                <input type="text" id="bio" placeholder="Short bio (e.g., Sci-fi lover & collector)">
+            </div>
+
+            <button type="submit" class="btn-primary">Save & Continue</button>
+        </form>
+
+        <p class="signup-text"><a href="login.html" style="color: var(--second);">Skip for now</a></p>
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const newUserJson = localStorage.getItem('newUser');
+        if (!newUserJson) {
+            window.location.href = 'login.html';
+            return;
+        }
+
+        const newUser = JSON.parse(newUserJson);
+
+        document.getElementById('onboardingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const alertBox = document.getElementById('onboardingAlert');
+            alertBox.style.display = 'none';
+
+            const username = document.getElementById('username').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const bio = document.getElementById('bio').value.trim();
+
+            const updatePayload = {
+                username: username,
+                address: address,
+                bio: bio
+            };
+
+            fetch(`http://localhost:8080/api/users/${newUser.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatePayload)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        return response.text().then(text => { throw new Error(text) });
+                    }
+                })
+                .then(updatedUser => {
+                    alertBox.style.color = '#88BDA4';
+                    alertBox.textContent = "Profile complete! Redirecting to login...";
+                    alertBox.style.display = 'block';
+
+                    localStorage.removeItem('newUser');
+                    setTimeout(() => {
+                        window.location.href = 'completeProfile.html';
+                    }, 1500);
+                })
+                .catch(error => {
+                    console.error('Onboarding error:', error);
+                    alertBox.style.color = '#88BDA4' ;
+                    alertBox.textContent = error.message || "Failed to update details. Please try again.";
+                    alertBox.style.display = 'block';
+                });
+        });
+    });
+</script>
+
+</body>
+</html>

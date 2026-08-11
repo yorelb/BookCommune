@@ -47,7 +47,17 @@ public class UserService {
     public User updateUser (Long id, User updatedUser) {
         User existingUser = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Can't update: User no found"));
-        //Decide on what should be editable
+
+        if (updatedUser.getUsername() != null && !updatedUser.getUsername().isEmpty()) {
+            existingUser.setUsername(updatedUser.getUsername());
+        }
+        if (updatedUser.getAddress() != null && !updatedUser.getAddress().isEmpty()) {
+            existingUser.setAddress(updatedUser.getAddress());
+        }
+        if (updatedUser.getBio() != null && !updatedUser.getBio().isEmpty()) {
+            existingUser.setBio(updatedUser.getBio());
+        }
+
         return userRepository.save(existingUser);
     }
 

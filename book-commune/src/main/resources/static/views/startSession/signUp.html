@@ -128,12 +128,13 @@
                 }
             })
             .then(data => {
+                localStorage.setItem('newUser', JSON.stringify(data));
                 alertBox.style.color = '#88BDA4';
-                alertBox.textContent = "Account created successfully! Redirecting to login...";
+                alertBox.textContent = "Account created successfully! Taking you to profile setup...";
                 alertBox.style.display = 'block';
 
                 setTimeout(() => {
-                    window.location.href = 'login.html';
+                    window.location.href = 'completeProfile.html';
                 }, 2000);
             })
             .catch(error => {
