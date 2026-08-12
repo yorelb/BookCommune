@@ -49,6 +49,12 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("Can't update: User no found"));
 
         if (updatedUser.getUsername() != null && !updatedUser.getUsername().isEmpty()) {
+            //Checking if the username is taken, if so, does it belong to current user?
+            Optional<User> userWithSame = userRepository.findByUsername(updatedUser.getUsername());
+            if (userWithSame.isPresent() && !userWithSame.get().getId().equals(id)) {
+                throw new IllegalArgumentException("That username is already taken. Please choose another one.");
+            }
+
             existingUser.setUsername(updatedUser.getUsername());
         }
         if (updatedUser.getAddress() != null && !updatedUser.getAddress().isEmpty()) {
