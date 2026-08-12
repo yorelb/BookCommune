@@ -39,4 +39,11 @@ public class BorrowController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    // Books borrowed
+    @GetMapping("/user/{userId}/numberofborrows")
+    public ResponseEntity<Integer> getActiveBorrowsForUser(@PathVariable Long userId) {
+        int borrows = borrowService.numberOfBooksBorrowed(userId);
+        return ResponseEntity.ok(borrows);
+    }
 }

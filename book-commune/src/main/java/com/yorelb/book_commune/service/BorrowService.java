@@ -9,6 +9,7 @@ import com.yorelb.book_commune.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -72,6 +73,12 @@ public class BorrowService {
         borrowedBook.setAvailability(false);
         bookRepository.save(borrowedBook);
         return borrowRepository.save(record);
+    }
+
+    //Find all borrowed books by a user other than rejections
+    public int numberOfBooksBorrowed(Long borrowerId) {
+        List<BorrowRecord> allAppearances = borrowRepository.findAllByBorrowerIdAndStatusNot(borrowerId, BorrowStatus.REJECTED);
+        return allAppearances.size();
     }
 }
 //TODO: Try write tests for these

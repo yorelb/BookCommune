@@ -1,4 +1,5 @@
 package com.yorelb.book_commune.repository;
+import com.yorelb.book_commune.model.Book;
 import com.yorelb.book_commune.model.BorrowRecord;
 import com.yorelb.book_commune.model.BorrowStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,5 +10,7 @@ import java.util.List;
 public interface BorrowRecordRepository extends JpaRepository<BorrowRecord, Long> {
     List<BorrowRecord> findByBorrowerId(Long borrowerId);
     List<BorrowRecord> findByStatus(BorrowStatus status);
+    List<BorrowRecord> findAllByBorrowerIdAndStatusNot(Long borrowerId, BorrowStatus status);
+
 }
 
