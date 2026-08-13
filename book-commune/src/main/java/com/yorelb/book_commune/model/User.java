@@ -20,6 +20,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Transient
+    private int borrowedBooks;
+
     private String forename;
     private String surname;
     private String address;
@@ -92,6 +95,10 @@ public class User {
 
     public void setProfileImageUrl(String profileImageUrl) { this.profileImageUrl = profileImageUrl; }
 
+    public int getBorrowedBooks() {return borrowedBooks;}
+
+    public void setBorrowedBooks(int borrowedBooks) {this.borrowedBooks = borrowedBooks;}
+
     private String roleToString (Role role) {
         String roleInString = " ";
         String [] roleInStringBits = role.toString().split("_");
@@ -105,4 +112,6 @@ public class User {
     public String getRoleName() {
         return roleToString(this.role);
     }
+
+
 }

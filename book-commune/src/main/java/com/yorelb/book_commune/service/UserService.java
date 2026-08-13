@@ -2,6 +2,7 @@ package com.yorelb.book_commune.service;
 
 import com.yorelb.book_commune.model.Book;
 import com.yorelb.book_commune.model.BorrowRecord;
+import com.yorelb.book_commune.model.BorrowStatus;
 import com.yorelb.book_commune.model.User;
 import com.yorelb.book_commune.repository.BookRepository;
 import com.yorelb.book_commune.repository.BorrowRecordRepository;
@@ -77,11 +78,12 @@ public class UserService {
 
     //Find a user by id
     public User findUser(Long userId) {
-        Optional<User> foundUser =  userRepository.findById(userId);
-        if (foundUser.isEmpty()) {
-            throw new IllegalArgumentException("Cannot find this user.");
-        }
-        return foundUser.get();
+        User foundUser =  userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        List<BorrowRecord> borrowedList = borrowRepository.findAllByBorrowerIdAndStatusNot(userId, BorrowStatus.REJECTED);
+        foundUser.setBorrowedBooks(borrowedList.size());
+        return foundUser;
     }
 
     //Find all users

@@ -75,10 +75,5 @@ public class BorrowService {
         return borrowRepository.save(record);
     }
 
-    //Find all borrowed books by a user other than rejections
-    public int numberOfBooksBorrowed(Long borrowerId) {
-        List<BorrowRecord> allAppearances = borrowRepository.findAllByBorrowerIdAndStatusNot(borrowerId, BorrowStatus.REJECTED);
-        return allAppearances.size();
-    }
 }
 //TODO: Try write tests for these

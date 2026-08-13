@@ -13,7 +13,7 @@
 <body>
 
 <!--TODO - MAKE EDIT PROFILE -->
-<!--TODO - Make books lent and borrowed by counting in the borrow table-->
+<!--TODO - Make books lent-->
 <!--TODO - Check if emails are valid with confirmation (way later)-->
 
 <div id="navbar-placeholder"></div>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="detail-item">
                     <p class="detail-label">Books Borrowed</p>
-                    <p class="detail-value">42 Books</p>
+                    <p class="detail-value" id="borrowedCount">Loading...</p>
                 </div>
                 <div class="detail-item">
                     <p class="detail-label">Books Lent</p>
@@ -85,12 +85,25 @@
 
         const user = JSON.parse(userJson);
 
-        document.getElementById('profileName').textContent = user.name || 'Unknown User';
-        document.getElementById('profileUsername').textContent = '@' + (user.username || 'user');
-        document.getElementById('profileEmail').textContent = user.email || 'No email provided';
-        document.getElementById('profileAddress').textContent = user.address || 'Location unknown';
-        document.getElementById('profileBio').textContent = user.bio || 'This user has not written a bio yet.';
-        document.getElementById('profileRole').textContent = user.roleName || 'Member';
+        fetch(`/api/users/${user.id}`)
+            .then(response => {
+                if (!response.ok) throw new Error("Failed to fetch fresh user data");
+                return response.json();
+            })
+            .then(user => {
+                document.getElementById('profileName').textContent = user.name || 'Unknown User';
+                document.getElementById('profileUsername').textContent = '@' + (user.username || 'user');
+                document.getElementById('profileEmail').textContent = user.email || 'No email provided';
+                document.getElementById('profileAddress').textContent = user.address || 'Location unknown';
+                document.getElementById('profileBio').textContent = user.bio || 'This user has not written a bio yet.';
+                document.getElementById('profileRole').textContent = user.roleName || 'Member';
+                document.getElementById('borrowedCount').textContent = user.borrowedBooks ?? 0;
+
+                localStorage.setItem('loggedInUser', JSON.stringify(user));
+            })
+            .catch(error => {
+                console.error("Error loading profile data from server:", error);
+            });
     });
 
     // Get the navbar
