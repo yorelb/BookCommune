@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Optional;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
@@ -83,6 +84,7 @@ public class UserService {
 
         List<BorrowRecord> borrowedList = borrowRepository.findAllByBorrowerIdAndStatusNot(userId, BorrowStatus.REJECTED);
         foundUser.setBorrowedBooks(borrowedList.size());
+        foundUser.setLentBooks(allLentByUser(userId));
         return foundUser;
     }
 
@@ -101,5 +103,10 @@ public class UserService {
         }
 
         return userToLogin;
+    }
+
+    // Count occurrences of each book a user owns in the borrow record table
+    private int allLentByUser(Long userId) {
+        return borrowRepository.countByBookOwnerIdAndStatusNot(userId,BorrowStatus.REJECTED );
     }
 }

@@ -13,7 +13,6 @@
 <body>
 
 <!--TODO - MAKE EDIT PROFILE -->
-<!--TODO - Make books lent-->
 <!--TODO - Check if emails are valid with confirmation (way later)-->
 
 <div id="navbar-placeholder"></div>
@@ -62,7 +61,7 @@
                 </div>
                 <div class="detail-item">
                     <p class="detail-label">Books Lent</p>
-                    <p class="detail-value">18 Books</p>
+                    <p class="detail-value" id="lentCount">Loading...</p>
                 </div>
                 <div class="detail-item">
                     <p class="detail-label">Bio</p>
@@ -98,6 +97,8 @@
                 document.getElementById('profileBio').textContent = user.bio || 'This user has not written a bio yet.';
                 document.getElementById('profileRole').textContent = user.roleName || 'Member';
                 document.getElementById('borrowedCount').textContent = user.borrowedBooks ?? 0;
+                document.getElementById('lentCount').textContent = user.lentBooks ?? 0;
+
 
                 localStorage.setItem('loggedInUser', JSON.stringify(user));
             })

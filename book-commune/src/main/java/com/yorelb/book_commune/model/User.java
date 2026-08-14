@@ -23,6 +23,9 @@ public class User {
     @Transient
     private int borrowedBooks;
 
+    @Transient
+    private int lentBooks;
+
     private String forename;
     private String surname;
     private String address;
@@ -91,13 +94,17 @@ public class User {
 
     public String getBio() {return bio;}
 
-    public String getProfileImageUrl() { return profileImageUrl; }
-
     public void setProfileImageUrl(String profileImageUrl) { this.profileImageUrl = profileImageUrl; }
 
-    public int getBorrowedBooks() {return borrowedBooks;}
+    public String getProfileImageUrl() { return profileImageUrl; }
 
     public void setBorrowedBooks(int borrowedBooks) {this.borrowedBooks = borrowedBooks;}
+
+    public int getLentBooks() {return lentBooks;}
+
+    public void setLentBooks(int lentBooks) {this.lentBooks = lentBooks;}
+
+    public int getBorrowedBooks() {return borrowedBooks;}
 
     private String roleToString (Role role) {
         String roleInString = " ";
