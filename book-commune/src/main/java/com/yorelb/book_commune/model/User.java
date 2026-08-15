@@ -1,7 +1,6 @@
 package com.yorelb.book_commune.model;
 import jakarta.persistence.*;
 import java.util.List;
-import java.util.Locale;
 
 @Entity
 @Table(name = "users")

@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/profileStyles.css">
+    <link rel="stylesheet" href="../../../css/userProfileStyles.css">
 </head>
 <body>
 
@@ -40,6 +40,7 @@
 
             <div class="card-header">
                 <h3>Profile details</h3>
+                <button id="editProfileBtn" class="edit-btn">Edit Profile</button>
             </div>
 
             <div class="details-grid">
@@ -78,7 +79,7 @@
         const userJson = localStorage.getItem('loggedInUser');
 
         if (!userJson) {
-            window.location.href = '../startSession/login.html';
+            window.location.href = '../../startSession/login.html';
             return;
         }
 
@@ -108,11 +109,19 @@
     });
 
     // Get the navbar
-    fetch('../components/navbar.html')
+    fetch('../../components/navbar.html')
         .then(response => response.text())
         .then(html => {
             document.getElementById('navbar-placeholder').innerHTML = html;
         })
         .catch(error => console.error('Error loading navbar:', error));
+
+    // Edit Profile Button Click
+    const editBtn = document.getElementById('editProfileBtn');
+    if (editBtn) {
+        editBtn.addEventListener('click', () => {
+            window.location.href = 'editProfile.html';
+        });
+    }
 </script>
 </html>

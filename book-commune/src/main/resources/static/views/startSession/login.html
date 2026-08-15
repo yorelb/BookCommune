@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Delius&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/loginStyles.css">
+    <link rel="stylesheet" href="../../css/startSessionStyles.css">
 </head>
 <body>
 <!-- TODO - Make error and confirmation messages look better-->
@@ -102,7 +102,7 @@
                 console.log("Logged in user:", user);
 
                 localStorage.setItem("loggedInUser", JSON.stringify(user));
-                window.location.href = '../userViews/profile.html';
+                window.location.href = '../userViews/userProfile/profile.html';
             })
             .catch(error => {
                 console.error('Login error:', error);

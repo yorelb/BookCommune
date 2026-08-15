@@ -206,6 +206,33 @@ body {
     }
 }
 
+#editProfileBtn {
+    width: auto;
+    padding: 0.6rem 1rem;
+    background-color: var(--first);
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--background-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+}
+
+#editProfileBtn:hover {
+    background-color: var(--background-color);
+    color: var(--first);
+}
+
+#editProfileBtn svg {
+    width: 18px;
+    height: 18px;
+}
+
 @media (max-width: 768px) {
     body {
         flex-direction: column;
