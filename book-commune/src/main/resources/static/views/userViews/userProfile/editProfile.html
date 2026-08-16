@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Edit Profile | BookCommune </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/userProfileStyles.css">
+<!--TODO: User should be able to change email and password in settings,, not here-->
+<!--TODO: Edit profile pic too-->
+<body>
+
+<div id="navbar-placeholder"></div>
+
+<main class="main-content">
+    <header class="page-header">
+        <h1>Edit Profile</h1>
+        <p>Update your personal information below.</p>
+    </header>
+
+    <div class="profile-container">
+
+        <!-- Left Card -->
+        <div class="profile-card user-identity">
+            <h2 id="profileName">Loading...</h2>
+            <p class="status-badge" id="profileUsername">@loading</p>
+
+            <div class="picture-container">
+            </div>
+        </div>
+
+        <!-- Right Card -->
+        <div class="profile-card user-details">
+            <div class="card-header">
+                <h3 style="margin: 0;">Update Details</h3>
+            </div>
+
+            <div id="errorMessage" class="error-message"></div>
+
+            <form id="editProfileForm">
+                <div class="edit-form-group">
+                    <label for="editUsername">Username</label>
+                    <input type="text" id="editUsername" name="username" required>
+                </div>
+
+                <div class="edit-form-group">
+                    <label for="editAddress">City or Region</label>
+                    <input type="text" id="editAddress" name="address" required>
+                </div>
+
+                <div class="edit-form-group">
+                    <label for="editBio">Bio</label>
+                    <textarea id="editBio" name="bio" placeholder="Tell the community about yourself..."></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="save-btn">Save Changes</button>
+                    <a href="profile.html" class="cancel-btn">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const userJson = localStorage.getItem('loggedInUser');
+
+        if (!userJson) {
+            window.location.href = '../startSession/login.html';
+            return;
+        }
+
+        const user = JSON.parse(userJson);
+
+        document.getElementById('profileName').textContent = user.name || 'Unknown User';
+        document.getElementById('profileUsername').textContent = '@' + (user.username || 'user');
+
+        document.getElementById('editUsername').value = user.username || '';
+        document.getElementById('editAddress').value = user.address || '';
+        document.getElementById('editBio').value = user.bio || '';
+
+        document.getElementById('editProfileForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const errorDiv = document.getElementById('errorMessage');
+            const submitBtn = document.querySelector('.save-btn');
+
+            errorDiv.style.display = 'none';
+            submitBtn.textContent = 'Saving...';
+            submitBtn.disabled = true;
+
+            const updatedData = {
+                username: document.getElementById('editUsername').value,
+                address: document.getElementById('editAddress').value,
+                bio: document.getElementById('editBio').value
+            };
+
+            fetch(`/api/users/${user.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedData)
+            })
+                .then(async response => {
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        throw new Error(errorText || "Failed to update profile");
+                    }
+                    return response.json();
+                })
+                .then(updatedUser => {
+                    const mergedUser = { ...user, ...updatedUser };
+                    localStorage.setItem('loggedInUser', JSON.stringify(mergedUser));
+                    window.location.href = 'profile.html';
+                })
+                .catch(error => {
+                    errorDiv.textContent = error.message;
+                    errorDiv.style.display = 'block';
+                    submitBtn.textContent = 'Save Changes';
+                    submitBtn.disabled = false;
+                });
+        });
+    });
+
+    fetch('../../components/navbar.html')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('navbar-placeholder').innerHTML = html;
+        })
+        .catch(error => console.error('Error loading navbar:', error));
+</script>
+</html>
