@@ -61,6 +61,9 @@ public class UserService {
         if (updatedUser.getBio() != null && !updatedUser.getBio().isEmpty()) {
             existingUser.setBio(updatedUser.getBio());
         }
+        if (updatedUser.getProfileImageUrl() != null && !updatedUser.getProfileImageUrl().isEmpty()) {
+            existingUser.setProfileImageUrl(updatedUser.getProfileImageUrl());
+        }
 
         return userRepository.save(existingUser);
     }

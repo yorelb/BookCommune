@@ -42,6 +42,11 @@
 
             <form id="editProfileForm">
                 <div class="edit-form-group">
+                    <label for="editProfilePicture">Profile Picture Link</label>
+                    <input type="text" id="editProfilePicture" name="ProfilePicture" required>
+                </div>
+
+                <div class="edit-form-group">
                     <label for="editUsername">Username</label>
                     <input type="text" id="editUsername" name="username" required>
                 </div>
@@ -80,6 +85,7 @@
         document.getElementById('profileName').textContent = user.name || 'Unknown User';
         document.getElementById('profileUsername').textContent = '@' + (user.username || 'user');
 
+        document.getElementById('editProfilePicture').value = user.profileImageUrl || '';
         document.getElementById('editUsername').value = user.username || '';
         document.getElementById('editAddress').value = user.address || '';
         document.getElementById('editBio').value = user.bio || '';
@@ -95,6 +101,7 @@
             submitBtn.disabled = true;
 
             const updatedData = {
+                profileImageUrl: document.getElementById('editProfilePicture').value,
                 username: document.getElementById('editUsername').value,
                 address: document.getElementById('editAddress').value,
                 bio: document.getElementById('editBio').value
