@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Change Email | BookCommune </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/settingsStyles.css">
+    <link rel="stylesheet" href="../../../css/userProfileStyles.css">
+
+
+</head>
+<!--TODO: TRY PUT THE JS FOR THESE HTML FILES IN THEIR OWN JS FILE-->
+<!--TODO: Make navbar functional-->
+<!--TODO: MAKE SETTINGS PAGE-->
+<!--TODO: Make this page reachable-->
+<body>
+
+<div id="navbar-placeholder"></div>
+
+<main class="main-content">
+    <header class="page-header">
+        <h1>Change Email</h1>
+        <p>For your security, please confirm your current password to change your email address.</p>
+    </header>
+
+    <div class="profile-container" style="justify-content: center; display: flex;">
+        <div class="profile-card user-details" style="width: 100%; max-width: 500px;">
+            <div class="card-header">
+                <h3 style="margin: 0;">Email Settings</h3>
+            </div>
+
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message">Email successfully updated! Redirecting...</div>
+
+            <form id="changeEmailForm">
+                <div class="edit-form-group">
+                    <label for="currentEmail">Current Email</label>
+                    <input type="email" id="currentEmail" required>
+                </div>
+
+                <div class="edit-form-group">
+                    <label for="newEmail">New Email</label>
+                    <input type="email" id="newEmail" required>
+                </div>
+
+                <div class="edit-form-group">
+                    <label for="confirmPassword">Password</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="save-btn">Update Email</button>
+                    <a href="profile.html" class="cancel-btn">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const userJson = localStorage.getItem('loggedInUser');
+        if (!userJson) {
+            window.location.href = '../startSession/login.html';
+            return;
+        }
+        const user = JSON.parse(userJson);
+
+        document.getElementById('changeEmailForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            const submitBtn = document.querySelector('.save-btn');
+
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            submitBtn.textContent = 'Verifying...';
+            submitBtn.disabled = true;
+
+            const requestData = {
+                currentEmail: document.getElementById('currentEmail').value,
+                newEmail: document.getElementById('newEmail').value,
+                password: document.getElementById('confirmPassword').value
+            };
+
+            fetch(`/api/users/${user.id}/email`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestData)
+            })
+                .then(async response => {
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        throw new Error(errorText || "Failed to update email");
+                    }
+                    return response.json();
+                })
+                .then(updatedUser => {
+                    const mergedUser = { ...user, ...updatedUser };
+                    localStorage.setItem('loggedInUser', JSON.stringify(mergedUser));
+
+                    successDiv.style.display = 'block';
+                    setTimeout(() => { window.location.href = 'profile.html'; }, 1500);
+                })
+                .catch(error => {
+                    errorDiv.textContent = error.message;
+                    errorDiv.style.display = 'block';
+                    submitBtn.textContent = 'Update Email';
+                    submitBtn.disabled = false;
+                });
+        });
+
+        fetch('../components/navbar.html')
+            .then(response => response.text())
+            .then(html => document.getElementById('navbar-placeholder').innerHTML = html)
+            .catch(error => console.error('Error loading navbar:', error));
+    });
+</script>
+</body>
+</html>

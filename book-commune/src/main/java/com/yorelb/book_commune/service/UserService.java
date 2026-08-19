@@ -108,4 +108,26 @@ public class UserService {
     private int allLentByUser(Long userId) {
         return borrowRepository.countByBookOwnerIdAndStatusNot(userId,BorrowStatus.REJECTED );
     }
+
+    // Change user's email
+    public User changeEmail(Long id, String currentEmail, String newEmail, String rawPassword) {
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        if (!existingUser.getEmail().equalsIgnoreCase(currentEmail)) {
+            throw new IllegalArgumentException("The current email you entered is incorrect.");
+        }
+        if (!passwordEncoder.matches(rawPassword, existingUser.getPassword())) {
+            throw new IllegalArgumentException("Incorrect password.");
+        }
+
+        Optional<User> userWithSameEmail = Optional.ofNullable(userRepository.findByEmail(newEmail));
+
+        if (userWithSameEmail.isPresent() && !userWithSameEmail.get().getId().equals(id)) {
+            throw new IllegalArgumentException("That email address is already in use.");
+        }
+
+        existingUser.setEmail(newEmail);
+        return userRepository.save(existingUser);
+    }
 }

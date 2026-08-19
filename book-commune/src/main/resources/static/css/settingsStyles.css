@@ -1,0 +1,84 @@
+:root {
+    --first: #659287;
+    --background-color: #E6F2DD;
+    --second: #88BDA4;
+    --third: #B1D3B9;
+    --fourth: #ebf3e5;
+}
+
+.edit-form-group {
+    margin-bottom: 1.5rem;
+}
+
+.edit-form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.edit-form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--fourth);
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    box-sizing: border-box;
+
+}
+
+.edit-form-group input:focus {
+    outline: none;
+    border-color: var(--first);
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.save-btn {
+    background-color: var(--first);
+    color: var(--fourth);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background-color: transparent;
+    color: #555;
+    border: 1px solid var(--fourth);
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.error-message {
+    color: #dc2626;
+    background-color: var(--fourth);
+    border: 1px solid #f87171;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    display: none;
+}
+
+.success-message {
+    color: var(--second);
+    background-color: var(--fourth);
+    border: 1px solid var(--third);
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    display: none;
+}

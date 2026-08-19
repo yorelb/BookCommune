@@ -1,5 +1,6 @@
 package com.yorelb.book_commune.controller;
 
+import com.yorelb.book_commune.dto.ChangeEmailRequest;
 import com.yorelb.book_commune.dto.LoginRequest;
 import com.yorelb.book_commune.model.User;
 import com.yorelb.book_commune.service.UserService;
@@ -84,6 +85,22 @@ public class UserController {
             return ResponseEntity.ok(loggedInUser);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+        }
+    }
+
+    /// Changing email
+    @PutMapping("/{id}/email")
+    public ResponseEntity<?> changeEmail(@PathVariable Long id, @RequestBody ChangeEmailRequest request) {
+        try {
+            User updatedUser = userService.changeEmail(
+                    id,
+                    request.getCurrentEmail(),
+                    request.getNewEmail(),
+                    request.getPassword()
+            );
+            return ResponseEntity.ok(updatedUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }
