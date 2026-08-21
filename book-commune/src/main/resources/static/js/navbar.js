@@ -11,8 +11,9 @@ fetch('/views/components/navbar.html')
         const currentPath = window.location.pathname;
         const navLinks = document.querySelectorAll('.nav-link');
 
-        navLinks.forEach(link => {const linkPath = link.getAttribute('href');
-            if (currentPath.includes(linkPath)) {
+        navLinks.forEach(link => {
+            const activeKeyword = link.getAttribute('data-active');
+            if (activeKeyword && currentPath.toLowerCase().includes(activeKeyword.toLowerCase())) {
                 link.classList.add('active-box');
             }
         });
