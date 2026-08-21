@@ -62,6 +62,15 @@
 </main>
 
 <script>
+
+    // Get the navbar
+    fetch('/views/components/navbar.html')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('navbar-placeholder').innerHTML = html;
+        })
+        .catch(error => console.error('Error loading navbar:', error));
+
     document.addEventListener('DOMContentLoaded', () => {
         const userJson = localStorage.getItem('loggedInUser');
         if (!userJson) {
@@ -114,11 +123,6 @@
                     submitBtn.disabled = false;
                 });
         });
-
-        fetch('../components/navbar.html')
-            .then(response => response.text())
-            .then(html => document.getElementById('navbar-placeholder').innerHTML = html)
-            .catch(error => console.error('Error loading navbar:', error));
     });
 </script>
 </body>
