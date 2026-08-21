@@ -49,19 +49,27 @@ body {
     display: contents;
 }
 
-.active-box {
+.nav-link {
+    display: contents;
+    text-decoration: none; /* Ensures no weird underlines appear */
+}
+
+/* Placed below .nav-link so it overrides 'display: contents' */
+.nav-link.active-box {
     background-color: var(--first);
     color: var(--fourth);
     padding: 10px;
     border-radius: 12px;
     width: 44px;
     height: 44px;
-    display: flex;
+    display: flex; /* This makes the link a proper box */
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 6px rgba(101, 146, 135, 0.3);
+    box-sizing: border-box; /* Keeps padding inside the 44px width */
 }
-.active-box svg {
+
+.nav-link.active-box svg {
     color: var(--fourth);
 }
 
