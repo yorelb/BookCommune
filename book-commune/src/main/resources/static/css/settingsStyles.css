@@ -14,7 +14,7 @@
     display: block;
     font-size: 0.9rem;
     font-weight: 600;
-    color: #555;
+    color: var(--first);
     margin-bottom: 0.5rem;
 }
 

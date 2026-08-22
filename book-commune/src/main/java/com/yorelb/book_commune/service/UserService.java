@@ -130,4 +130,19 @@ public class UserService {
         existingUser.setEmail(newEmail);
         return userRepository.save(existingUser);
     }
+
+    // Change password
+    public User changePassword(Long id, String currentPassword, String newPassword) {
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        if (!passwordEncoder.matches(currentPassword, existingUser.getPassword())) {
+            throw new IllegalArgumentException("The current password you entered is incorrect.");
+        }
+
+        String encryptedNewPassword = passwordEncoder.encode(newPassword);
+        existingUser.setPassword(encryptedNewPassword);
+
+        return userRepository.save(existingUser);
+    }
 }
