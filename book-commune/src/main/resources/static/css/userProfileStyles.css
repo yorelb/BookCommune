@@ -51,10 +51,9 @@ body {
 
 .nav-link {
     display: contents;
-    text-decoration: none; /* Ensures no weird underlines appear */
+    text-decoration: none;
 }
 
-/* Placed below .nav-link so it overrides 'display: contents' */
 .nav-link.active-box {
     background-color: var(--first);
     color: var(--fourth);
@@ -62,11 +61,11 @@ body {
     border-radius: 12px;
     width: 44px;
     height: 44px;
-    display: flex; /* This makes the link a proper box */
+    display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 6px rgba(101, 146, 135, 0.3);
-    box-sizing: border-box; /* Keeps padding inside the 44px width */
+    box-sizing: border-box;
 }
 
 .nav-link.active-box svg {
@@ -267,8 +266,9 @@ body {
     display: block;
     font-size: 0.9rem;
     font-weight: 600;
-    color: #555;
+    color: var(--first);
     margin-bottom: 0.5rem;
+
 }
 .edit-form-group input,
 .edit-form-group textarea {
@@ -278,7 +278,7 @@ body {
     border-radius: 6px;
     font-family: 'Inter', sans-serif;
     font-size: 1rem;
-    color: #333;
+    color: var(--first);
     box-sizing: border-box;
     transition: border-color 0.2s;
 }
