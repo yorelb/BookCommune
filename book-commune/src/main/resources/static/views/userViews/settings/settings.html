@@ -1,10 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Settings | BookCommune </title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/userProfileStyles.css">
+    <link rel="stylesheet" href="../../../css/settingsStyles.css">
 </head>
+<!--TODO: Unfinished but lets focus on the main feed next-->
 <body>
-<!--TODO: Accessibility-->
+
+<div id="navbar-placeholder"></div>
+
+<main class="main-content">
+
+    <header class="page-header">
+        <h1>Settings</h1>
+        <p>Manage your account preferences and security.</p>
+    </header>
+
+    <div class="settings-container">
+
+        <!--Left-->
+        <aside class="theme-card settings-nav">
+            <a class="nav-item active">
+                Your account
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+            <a class="nav-item">
+                Privacy and safety
+<!-- TODO: Check what exactly would even be here-->
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+            <a class="nav-item">
+                Notifications
+<!-- TODO: Different notif options -->
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+            <a class="nav-item">
+                Display & Accessibility
+<!-- TODO: Create dark mode version,, perhaps with --first-->
+<!-- TODO: Accessibility statement as well as options. text sizze etc-->
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+        </aside>
+
+        <!-- Right -->
+        <section class="theme-card settings-content">
+            <h3>Your Account</h3>
+
+            <!--Profile - goes to user profile but in future should probably display more of the user stats than shown i user profile e.g. start date etc-->
+            <a href="../userProfile/profile.html" class="setting-option">
+                <div class="option-label">Profile Configuration</div>
+                <div class="option-title">Account information</div>
+                <p class="option-desc">See your account information like your username, bio, and location.</p>
+            </a>
+
+            <!-- Email -->
+            <a href="changeEmail.html" class="setting-option">
+                <div class="option-label">Contact Details</div>
+                <div class="option-title">Change your email</div>
+                <p class="option-desc">Update the email address associated with your BookCommune account.</p>
+            </a>
+
+            <!-- Password -->
+            <a href="changePassword.html" class="setting-option">
+                <div class="option-label">Security</div>
+                <div class="option-title">Change your password</div>
+                <p class="option-desc">Change your password at any time to keep your account secure.</p>
+            </a>
+
+            <!-- Deactivate -->
+            <a href="#" class="setting-option">
+                <div class="option-label">Deactivate</div>
+                <div class="option-title">Deactivate your account</div>
+                <p class="option-desc">Find out how you can deactivate or delete your account permanently.</p>
+            </a>
+
+        </section>
+
+    </div>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const userJson = localStorage.getItem('loggedInUser');
+        if (!userJson) {
+            window.location.href = '../../startSession/login.html';
+        }
+    });
+</script>
 <script src="/js/navbar.js"></script>
 </body>
 </html>

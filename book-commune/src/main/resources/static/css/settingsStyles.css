@@ -82,3 +82,106 @@
     margin-bottom: 1.5rem;
     display: none;
 }
+
+/* Settings page*/
+
+.settings-container {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    max-width: 1200px;
+}
+
+.theme-card {
+    border: 1px solid var(--third, #a3c9b0);
+    border-radius: 12px;
+    background-color: var(--fourth);
+    padding: 2rem;
+}
+
+.settings-nav {
+    width: 300px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.nav-item {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    color: var(--first, #5b8c85);
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+.nav-item:hover {
+    background-color: rgba(91, 140, 133, 0.1);
+}
+.nav-item.active {
+    background-color: rgba(91, 140, 133, 0.15);
+    border-left: 4px solid var(--first, #5b8c85);
+}
+
+.settings-content {
+    flex-grow: 1;
+}
+
+.settings-content h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--first, #5b8c85);
+    margin: 0 0 2rem 0;
+}
+
+.setting-option {
+    display: block;
+    text-decoration: none;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(163, 201, 176, 0.4);
+    transition: transform 0.2s ease;
+}
+.setting-option:hover {
+    transform: translateX(8px);
+}
+.setting-option:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.option-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--second, #7da59c);
+    letter-spacing: 0.5px;
+    margin-bottom: 0.4rem;
+}
+
+.option-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--first, #5b8c85);
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+}
+
+.option-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--first, #5b8c85);
+    opacity: 0.85;
+    margin: 0;
+}
