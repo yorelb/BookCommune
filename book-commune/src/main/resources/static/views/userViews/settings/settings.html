@@ -27,30 +27,32 @@
 
         <!--Left-->
         <aside class="theme-card settings-nav">
-            <a class="nav-item active">
+            <a class="nav-item active" data-target="account-section">
                 Your account
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </a>
-            <a class="nav-item">
+
+            <a class="nav-item" data-target="privacy-section">
                 Privacy and safety
-<!-- TODO: Check what exactly would even be here-->
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </a>
-            <a class="nav-item">
+
+            <a class="nav-item" data-target="notifications-section">
                 Notifications
-<!-- TODO: Different notif options -->
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </a>
-            <a class="nav-item">
+
+            <a class="nav-item" data-target="display-section">
                 Display & Accessibility
-<!-- TODO: Create dark mode version,, perhaps with --first-->
-<!-- TODO: Accessibility statement as well as options. text sizze etc-->
+                <!-- TODO: Accessibility statement as well as options. text sizze etc-->
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </a>
         </aside>
 
         <!-- Right -->
-        <section class="theme-card settings-content">
+
+        <!-- Account -->
+        <section id="account-section" class="theme-card settings-content">
             <!--Profile - goes to user profile but in future should probably display more of the user stats than shown i user profile e.g. start date etc-->
             <a href="../userProfile/profile.html" class="setting-option">
                 <div class="option-title">Account information</div>
@@ -74,7 +76,34 @@
                 <div class="option-title">Deactivate your account</div>
                 <p class="option-desc">Find out how you can deactivate or delete your account permanently.</p>
             </a>
+        </section>
 
+        <!-- Privacy-->
+        <section id="privacy-section" class="theme-card settings-content hidden-section">
+            <a href="#" class="setting-option">
+                <div class="option-title">Profile visibility</div>
+                <p class="option-desc">Control whether members can find your library on the explore feed.</p>
+            </a>
+            <a href="#" class="setting-option">
+                <div class="option-title">Blocked accounts</div>
+                <p class="option-desc">Manage accounts you have blocked from requesting loans.</p>
+            </a>
+        </section>
+
+        <!-- Notifications -->
+        <section id="notifications-section" class="theme-card settings-content hidden-section">
+            <a href="#" class="setting-option">
+                <div class="option-title">Email Notifications</div>
+                <p class="option-desc">Choose when BookCommune sends you emails about loan requests.</p>
+            </a>
+        </section>
+
+        <!-- Accessibility -->
+        <section id="display-section" class="theme-card settings-content hidden-section">
+            <a href="#" class="setting-option">
+                <div class="option-title">Dark Mode</div>
+                <p class="option-desc">Toggle the visual theme of BookCommune.</p>
+            </a>
         </section>
 
     </div>
@@ -85,7 +114,24 @@
         const userJson = localStorage.getItem('loggedInUser');
         if (!userJson) {
             window.location.href = '../../startSession/login.html';
+            return;
         }
+
+        const navItems = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('.settings-content');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navItems.forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+                sections.forEach(sec => sec.classList.add('hidden-section'));
+                const targetId = item.getAttribute('data-target');
+
+                if (targetId) {
+                    document.getElementById(targetId).classList.remove('hidden-section');
+                }
+            });
+        });
     });
 </script>
 <script src="/js/navbar.js"></script>

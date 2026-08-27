@@ -185,3 +185,7 @@
     opacity: 0.85;
     margin: 0;
 }
+
+.hidden-section {
+    display: none !important;
+}
