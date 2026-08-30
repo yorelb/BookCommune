@@ -73,7 +73,7 @@ public class User {
     }
 
     public String getAddress() {
-        return city + "," + country;
+        return city + ", " + country;
     }
 
     public String getCity() {
