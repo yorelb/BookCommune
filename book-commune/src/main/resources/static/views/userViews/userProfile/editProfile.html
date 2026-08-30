@@ -50,8 +50,18 @@
                 </div>
 
                 <div class="edit-form-group">
-                    <label for="editAddress">City or Region</label>
-                    <input type="text" id="editAddress" name="address" required>
+                    <label for="editCity">City</label>
+                    <input type="text" id="editCity" name="city" required>
+                </div>
+
+                <div class="edit-form-group">
+                    <label for="editCountry">Country</label>
+                    <input type="text" id="editCountry" name="country" required>
+                </div>
+
+                <div class="edit-form-group">
+                    <label for="editPostcode">Postcode</label>
+                    <input type="text" id="editPostcode" name="postcode" required>
                 </div>
 
                 <div class="edit-form-group">
@@ -83,7 +93,9 @@
 
         document.getElementById('editProfilePicture').value = user.profileImageUrl || '';
         document.getElementById('editUsername').value = user.username || '';
-        document.getElementById('editAddress').value = user.address || '';
+        document.getElementById('editCity').value = user.city || '';
+        document.getElementById('editCountry').value = user.country || '';
+        document.getElementById('editPostcode').value = user.postcode || '';
         document.getElementById('editBio').value = user.bio || '';
 
         document.getElementById('editProfileForm').addEventListener('submit', (e) => {
@@ -99,7 +111,9 @@
             const updatedData = {
                 profileImageUrl: document.getElementById('editProfilePicture').value,
                 username: document.getElementById('editUsername').value,
-                address: document.getElementById('editAddress').value,
+                city: document.getElementById('editCity').value,
+                country: document.getElementById('editCountry').value,
+                postcode: document.getElementById('editPostcode').value,
                 bio: document.getElementById('editBio').value
             };
 

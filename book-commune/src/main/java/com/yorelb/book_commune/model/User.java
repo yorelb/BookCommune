@@ -27,7 +27,10 @@ public class User {
 
     private String forename;
     private String surname;
-    private String address;
+    //im thinking actual address isnt needed. Use delivery boxes instead. So city, country, postcode.
+    private String city;
+    private String country;
+    private String postcode;
     private String bio;
     private Role role = Role.COMMUNITY_MEMBER;
     // Using link "simulates" storing image elsewhere and using link to access
@@ -70,11 +73,31 @@ public class User {
     }
 
     public String getAddress() {
-        return address;
+        return city + "," + country;
     }
 
-    public void setAddress (String address) {
-        this.address = address;
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity (String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry (String country) {
+        this.country = country;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode (String postcode) {
+        this.postcode = postcode;
     }
 
     public String getUsername() {return username;}

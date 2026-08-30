@@ -55,8 +55,14 @@ public class UserService {
 
             existingUser.setUsername(updatedUser.getUsername());
         }
-        if (updatedUser.getAddress() != null && !updatedUser.getAddress().isEmpty()) {
-            existingUser.setAddress(updatedUser.getAddress());
+        if (updatedUser.getCity() != null && !updatedUser.getCity().isEmpty()) {
+            existingUser.setCity(updatedUser.getCity());
+        }
+        if (updatedUser.getCountry() != null && !updatedUser.getCountry().isEmpty()) {
+            existingUser.setCountry(updatedUser.getCountry());
+        }
+        if (updatedUser.getPostcode() != null && !updatedUser.getPostcode().isEmpty()) {
+            existingUser.setPostcode(updatedUser.getPostcode());
         }
         if (updatedUser.getBio() != null && !updatedUser.getBio().isEmpty()) {
             existingUser.setBio(updatedUser.getBio());

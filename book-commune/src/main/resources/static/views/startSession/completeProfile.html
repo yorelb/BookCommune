@@ -34,7 +34,15 @@
             </div>
 
             <div class="input-group">
-                <input type="text" id="address" placeholder="City & Country (e.g., Sheffield, UK)" required>
+                <input type="text" id="city" placeholder="City (e.g., Sheffield)" required>
+            </div>
+
+            <div class="input-group">
+                <input type="text" id="country" placeholder="Country (e.g., UK)" required>
+            </div>
+<!--            TODO: Will need to check validity of postcodes/address-->
+            <div class="input-group">
+                <input type="text" id="postcode" placeholder="Postcode (S3 4BT)" required>
             </div>
 
             <div class="input-group">
@@ -66,12 +74,17 @@
             alertBox.style.display = 'none';
 
             const username = document.getElementById('username').value.trim();
-            const address = document.getElementById('address').value.trim();
+            const city = document.getElementById('city').value.trim();
+            const country = document.getElementById('country').value.trim();
+            const postcode = document.getElementById('postcode').value.trim();
+
             const bio = document.getElementById('bio').value.trim();
 
             const updatePayload = {
                 username: username,
-                address: address,
+                city: city,
+                country: country,
+                postcode: postcode,
                 bio: bio
             };
 
