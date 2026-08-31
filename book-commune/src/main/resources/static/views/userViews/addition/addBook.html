@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Add a Book | BookCommune </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/userProfileStyles.css">
+    <link rel="stylesheet" href="../../../css/addBookStyles.css">
+</head>
+<body>
+
+<div id="navbar-placeholder"></div>
+
+<main class="main-content">
+
+    <header class="page-header">
+        <h1>List a Book</h1>
+        <p>Add a new book to your library so bookCommune members near you can request to borrow it.</p>
+    </header>
+
+    <div class="profile-container form-wrapper">
+        <section class="profile-card add-book-card">
+
+            <form id="addBookForm">
+
+                <div class="form-group">
+                    <label for="title" class="form-label">Book Title</label>
+                    <input type="text" id="title" name="title" class="form-input" placeholder="e.g. The Hobbit" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="author" class="form-label">Author</label>
+                    <input type="text" id="author" name="author" class="form-input" placeholder="e.g. J.R.R. Tolkien" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="isbn" class="form-label">ISBN</label>
+                    <input type="text" id="isbn" name="isbn" class="form-input" placeholder="Random ISBN NUm" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="condition" class="form-label">Condition</label>
+                    <select id="condition" name="condition" class="form-input" required>
+                        <option value="" disabled selected>Select condition...</option>
+                        <option value="ONESTAR">One Star</option>
+                        <option value="TWOSTAR">Two Stars</option>
+                        <option value="THREESTAR">Three Stars</option>
+                        <option value="FOURSTAR">Four Stars</option>
+                        <option value="FIVESTAR">Five Stars</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="imgUrl" class="form-label">Cover Image URL</label>
+                    <input type="url" id="imgUrl" name="imgUrl" class="form-input" placeholder="https://example.com/cover.jpg">
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="form-label">Description / Notes (Optional)</label>
+                    <textarea id="description" name="description" class="form-input" placeholder="Any specific details about this copy?"></textarea>
+                </div>
+
+
+                <button type="submit" class="submit-btn">Add to the Commune</button>
+
+            </form>
+        </section>
+    </div>
+
+</main>
+<script src="/js/addBook.js"></script>
+<script src="/js/navbar.js"></script>
+</body>
+</html>

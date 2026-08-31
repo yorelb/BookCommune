@@ -14,6 +14,7 @@ public class Book {
     private String isbn;
     private String description;
     private boolean available = true;
+    private String bookImageUrl;
 
     @Enumerated(EnumType.STRING)
     private Condition condition;
@@ -89,4 +90,8 @@ public class Book {
     public void setAvailability(boolean available) {
         this.available = available;
     }
+
+    public String getBookImageUrl() { return bookImageUrl; }
+
+    public void setBookImageUrl(String bookImageUrl) { this.bookImageUrl = bookImageUrl; }
 }

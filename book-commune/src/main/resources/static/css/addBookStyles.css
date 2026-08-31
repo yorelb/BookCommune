@@ -1,0 +1,72 @@
+:root {
+    --first: #659287;
+    --background-color: #E6F2DD;
+    --second: #88BDA4;
+    --third: #B1D3B9;
+    --fourth: #ebf3e5;
+}
+
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.add-book-card {
+    width: 100%;
+    max-width: 600px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--first);
+    margin-bottom: 0.4rem;
+}
+
+.form-input {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background-color: #fff;
+    color: var(--first);
+    transition: all 0.2s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--first);
+}
+
+textarea.form-input {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 0.85rem;
+    background-color: var(--first);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-top: 1rem;
+}
+
+.submit-btn:hover {
+    opacity: 0.9;
+}

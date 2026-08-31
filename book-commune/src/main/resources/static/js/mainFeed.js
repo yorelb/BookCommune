@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (availableBooks.length === 0) {
         feedContainer.innerHTML = `
                 <div class="empty-state">
-                    <h3>No books found in ${userCity} 😔</h3>
+                    <h3>No books found in ${userCity}</h3>
                     <p>Be the first to list a book in your area!</p>
                 </div>
             `;
@@ -96,7 +96,7 @@ function requestBorrow(bookId) {
 //             if (availableBooks.length === 0) {
 //                 feedContainer.innerHTML = `
 //                     <div class="empty-state">
-//                         <h3>No books found in ${userCity} 😔</h3>
+//                         <h3>No books found in ${userCity}</h3>
 //                         <p>Be the first to list a book in your area!</p>
 //                     </div>
 //                 `;
