@@ -74,30 +74,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
-
-
-// Dummy function
 async function requestBorrow(bookId, buttonElement) {
     const userJson = localStorage.getItem('loggedInUser');
     if (!userJson) return;
     const user = JSON.parse(userJson);
 
     try {
-        const response = await fetch('/api/borrow/request', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                bookId: bookId,
-                requesterId: user.id
-            })
+        const response = await fetch(`/api/borrow/request?bookId=${bookId}&borrowerId=${user.id}`, {
+            method: 'POST'
         });
 
         if (response.ok) {
             buttonElement.textContent = "Requested";
             buttonElement.disabled = true;
-            buttonElement.style.backgroundColor = "#ccc";
+            buttonElement.style.backgroundColor = "#88BDA4";
         } else {
-            alert("Failed to send request. Please try again.");
+            const errorText = await response.text();
+            alert(errorText || "Failed to send request. Please try again."); //TODO: Dont list own books
         }
     } catch (error) {
         console.error("Error requesting book:", error);
