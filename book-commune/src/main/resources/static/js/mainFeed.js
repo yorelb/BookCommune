@@ -5,25 +5,28 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
     const user = JSON.parse(userJson);
-    const userCity = user.address || "Unknown City";
+    const locationString = [user.city, user.country].filter(Boolean).join(', ');
+    const userCity = locationString || 'Unknown';
 
     //user's city
     document.getElementById('userCityDisplay').textContent = userCity;
 
     // TODO: Populayte db with real/mock data
+    // TODO: Two cities with the same name?
     // eventually turns the condition into stars (actual)
     const dummyBooks = [
-        { id: 1, title: "The Hobbit", author: "J.R.R. Tolkien", condition: "TWOSTAR", owner: "@FairlyOdd", city: "Manchester, UK", img: "https://via.placeholder.com/300x450/5b8c85/ffffff?text=The+Hobbit" },
-        { id: 2, title: "1984", author: "George Orwell", condition: "FIVESTAR", owner: "@BookWorm99", city: "Manchester, UK", img: "https://via.placeholder.com/300x450/7da59c/ffffff?text=1984" },
-        { id: 3, title: "Dune", author: "Frank Herbert", condition: "THREESTAR", owner: "@SciFiGuy", city: "London, UK", img: "https://via.placeholder.com/300x450/a3c9b0/ffffff?text=Dune" },
-        { id: 4, title: "Pride and Prejudice", author: "Jane Austen", condition: "FOURSTAR", owner: "@ClassicReader", city: "Manchester, UK", img: "https://via.placeholder.com/300x450/5b8c85/ffffff?text=Pride+%26+Prejudice" },
-        { id: 5, title: "The Catcher in the Rye", author: "J.D. Salinger", condition: "ONESTAR", owner: "@LitLover", city: "Manchester, UK", img: "https://via.placeholder.com/300x450/7da59c/ffffff?text=Catcher+in+the+Rye" },
-        { id: 6, title: "Brave New World", author: "Aldous Huxley", condition: "FIVESTAR", owner: "@LondonReader", city: "London, UK", img: "https://via.placeholder.com/300x450/5b8c85/ffffff?text=Brave+New+World" }
+        { id: 1, title: "The Hobbit", author: "J.R.R. Tolkien", condition: "TWOSTAR", owner: "@FairlyOdd", city: "Sheffield", img: "https://via.placeholder.com/300x450/5b8c85/ffffff?text=The+Hobbit" },
+        { id: 2, title: "1984", author: "George Orwell", condition: "FIVESTAR", owner: "@BookWorm99", city: "Manchester", img: "https://via.placeholder.com/300x450/7da59c/ffffff?text=1984" },
+        { id: 3, title: "Dune", author: "Frank Herbert", condition: "THREESTAR", owner: "@SciFiGuy", city: "Sheffield", img: "https://via.placeholder.com/300x450/a3c9b0/ffffff?text=Dune" },
+        { id: 4, title: "Pride and Prejudice", author: "Jane Austen", condition: "FOURSTAR", owner: "@ClassicReader", city: "Manchester", img: "https://via.placeholder.com/300x450/5b8c85/ffffff?text=Pride+%26+Prejudice" },
+        { id: 5, title: "The Catcher in the Rye", author: "J.D. Salinger", condition: "ONESTAR", owner: "@LitLover", city: "Manchester", img: "https://via.placeholder.com/300x450/7da59c/ffffff?text=Catcher+in+the+Rye" },
+        { id: 6, title: "Brave New World", author: "Aldous Huxley", condition: "FIVESTAR", owner: "@LondonReader", city: "London", img: "https://via.placeholder.com/300x450/5b8c85/ffffff?text=Brave+New+World" }
     ];
 
     // Filter
+    //TODO: Hacky fix - books dont have a city field,, they're based on the user's city - can be done with a repo query
     const availableBooks = dummyBooks.filter(book =>
-        book.city.toLowerCase() === userCity.toLowerCase()
+        book.city.toLowerCase() === user.city.toLowerCase()
     );
 
     const feedContainer = document.getElementById('booksFeed');
