@@ -7,4 +7,3 @@ public enum BorrowStatus {
     OVERDUE,
     REJECTED
 }
-//NOTE: The rejected should be for if a user rejects to lend the book to another user

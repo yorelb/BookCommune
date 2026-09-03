@@ -1,0 +1,111 @@
+:root {
+    --first: #659287;
+    --background-color: #E6F2DD;
+    --second: #88BDA4;
+    --third: #B1D3B9;
+    --fourth: #ebf3e5;
+}
+
+.explore-container {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.explore-card {
+    flex: 1;
+    background-color: var(--fourth);
+    border: 1px solid var(--third);
+    border-radius: 16px;
+    padding: 2.5rem;
+}
+
+.card-header {
+    margin-bottom: 2rem;
+    border-bottom: 1px dashed var(--second);
+    padding-bottom: 1rem;
+}
+
+.card-header h3 {
+    font-size: 1.25rem;
+    color: var(--first);
+    font-weight: 700;
+}
+
+.request-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.request-item {
+    border-bottom: 1px solid var(--third);
+    padding-bottom: 1.5rem;
+}
+
+.request-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.request-label {
+    color: var(--second);
+    font-size: 0.75rem;
+    text-transform: uppercase; /*looks better uppercase but that isnt the style of the site. look into this*/
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.request-value {
+    color: var(--first);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.btn-approve, .btn-deny {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-approve {
+    background-color: var(--first);
+    color: var(--background-color);
+    border: 1px solid transparent;
+}
+
+.btn-approve:hover {
+    background-color: var(--background-color);
+    color: var(--first);
+    border: 1px solid var(--first);
+}
+
+.btn-deny {
+    background-color: transparent;
+    color: var(--first);
+    border: 1px solid var(--third);
+}
+
+.btn-deny:hover {
+    background-color: var(--second);
+    color: var(--background-color);
+}
+
+@media (max-width: 992px) {
+    .explore-container {
+        flex-direction: column;
+    }
+    .explore-card {
+        width: 100%;
+    }
+}

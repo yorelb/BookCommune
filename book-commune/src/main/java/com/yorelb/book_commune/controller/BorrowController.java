@@ -39,4 +39,35 @@ public class BorrowController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    // Fetch requests made by the user
+    @GetMapping("/outgoing/{userId}")
+    public ResponseEntity<?> getOutgoingRequests(@PathVariable Long userId) {
+        try {
+            return ResponseEntity.ok(borrowService.getOutgoingRequests(userId));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    // Fetch requests made to the user for their books
+    @GetMapping("/incoming/{userId}")
+    public ResponseEntity<?> getIncomingRequests(@PathVariable Long userId) {
+        try {
+            return ResponseEntity.ok(borrowService.getIncomingRequests(userId));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    // Owner denies borrow request
+    @PostMapping("/{recordId}/deny")
+    public ResponseEntity<?> denyBorrow(@PathVariable Long recordId) {
+        try {
+            BorrowRecord record = borrowService.denyBorrowRequest(recordId);
+            return ResponseEntity.ok(record);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

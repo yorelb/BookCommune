@@ -9,11 +9,46 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../../css/feedStyles.css">
+    <link rel="stylesheet" href="../../../css/exploreStyles.css">
     <link rel="stylesheet" href="../../../css/userProfileStyles.css">
 
 </head>
 <body>
+
+<!--Hold off these for now, focus on improving the current appplication-->
+<!-- TODO: Current borrow section so can return?-->
+<!-- TODO: Borrow periods are needed?-->
+<!-- TODO: Email notifications for borrows and deliveries-->
+
 <div id="navbar-placeholder"></div>
+
+<main class="main-content">
+    <header class="page-header">
+        <h1>Borrow Requests</h1>
+        <p>Track the books you've asked for and manage requests from other users.</p>
+    </header>
+
+    <div class="explore-container">
+
+        <!-- Left -->
+        <div class="explore-card">
+            <div class="card-header">
+                <h3>My Requests</h3>
+            </div>
+            <div id="outgoingRequestsContainer" class="request-grid"></div>
+        </div>
+
+        <!-- Right -->
+        <div class="explore-card">
+            <div class="card-header">
+                <h3>Incoming Requests</h3>
+            </div>
+            <div id="incomingRequestsContainer" class="request-grid"></div>
+        </div>
+    </div>
+</main>
+
+<script src="/js/explorePage.js"></script>
 <script src="/js/navbar.js"></script>
 </body>
 </html>

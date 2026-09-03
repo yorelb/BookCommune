@@ -74,5 +74,29 @@ public class BorrowService {
         return borrowRepository.save(record);
     }
 
+    // Fetch requests made by the user (Outgoing)
+    public java.util.List<BorrowRecord> getOutgoingRequests(Long userId) {
+        return borrowRepository.findByBorrowerId(userId);
+    }
+
+    // Fetch requests made to the user for their books (Incoming)
+    public java.util.List<BorrowRecord> getIncomingRequests(Long userId) {
+        return borrowRepository.findByBookOwnerId(userId);
+    }
+
+    // Denying a borrow request
+    public BorrowRecord denyBorrowRequest(Long recordId) {
+        Optional<BorrowRecord> recordOpt = borrowRepository.findById(recordId);
+
+        if (recordOpt.isEmpty()) {
+            throw new IllegalArgumentException("Transaction not found.");
+        }
+
+        BorrowRecord record = recordOpt.get();
+        record.setStatus(BorrowStatus.REJECTED);
+        return borrowRepository.save(record);
+    }
+
+    //TODO: Try write tests for these
+
 }
-//TODO: Try write tests for these
