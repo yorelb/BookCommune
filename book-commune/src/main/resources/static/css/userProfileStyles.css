@@ -20,64 +20,6 @@ body {
     display: flex;
 }
 
-/*Move to a global style thingy*/
-.sidebar {
-    width: 80px;
-    background-color: var(--fourth);
-    border-right: 1px solid var(--third);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2.5rem 0;
-    gap: 2.5rem;
-    flex-shrink: 0;
-}
-
-.nav-icon {
-    width: 24px;
-    height: 24px;
-    color: var(--second);
-    cursor: pointer;
-    transition: color 0.2s ease;
-}
-
-.nav-icon:hover {
-    color: var(--first);
-}
-
-#navbar-placeholder {
-    display: contents;
-}
-
-.nav-link {
-    display: contents;
-    text-decoration: none;
-}
-
-.nav-link.active-box {
-    background-color: var(--first);
-    color: var(--fourth);
-    padding: 10px;
-    border-radius: 12px;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 6px rgba(101, 146, 135, 0.3);
-    box-sizing: border-box;
-}
-
-.nav-link.active-box svg {
-    color: var(--fourth);
-}
-
-#logoutBtn {
-    display: flex;
-    margin-top: auto;
-    padding-bottom: 1rem;
-}
-
 .main-content {
     flex: 1;
     padding: 3rem 5%;
