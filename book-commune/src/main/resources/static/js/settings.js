@@ -21,3 +21,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    if (localStorage.getItem('theme') === 'dark') {
+        darkModeToggle.checked = true;
+    }
+
+    darkModeToggle.addEventListener('change', (e) => {
+        if (e.target.checked) {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
+        }
+    });
+});

@@ -100,10 +100,17 @@
 
         <!-- Accessibility -->
         <section id="display-section" class="theme-card settings-content hidden-section">
-            <a href="#" class="setting-option">
-                <div class="option-title">Dark Mode</div>
-                <p class="option-desc">Toggle the visual theme of BookCommune.</p>
-            </a>
+            <div class="setting-option" style="display: flex; justify-content: space-between; align-items: center; cursor: default;">
+                <div>
+                    <div class="option-title">Dark Mode</div>
+                    <p class="option-desc">Toggle the visual theme of BookCommune.</p>
+                </div>
+<!--                TODO: Colours very ugly,, remember to change-->
+                <label class="theme-switch">
+                    <input type="checkbox" id="darkModeToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
         </section>
 
     </div>

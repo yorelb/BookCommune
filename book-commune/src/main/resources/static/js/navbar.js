@@ -1,3 +1,8 @@
+//Darkmode
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+}
+
 // Get the navbar
 fetch('/views/components/navbar.html')
     .then(response => {
@@ -55,3 +60,4 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => console.error('Error loading navbar:', error));
     }
 });
+
