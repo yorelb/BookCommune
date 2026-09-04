@@ -6,6 +6,46 @@
     --fourth: #ebf3e5;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--first);
+    min-height: 100vh;
+    display: flex;
+}
+
+.main-content {
+    flex: 1;
+    padding: 3rem 5%;
+    overflow-y: auto;
+}
+
+.page-header {
+    border-bottom: 1px dashed var(--second);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.page-header h1 {
+    font-family: 'Chewy', cursive;
+    font-size: 3.5rem;
+    color: var(--first);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+.page-header p {
+    color: var(--second);
+    font-size: 1rem;
+}
+
 .sidebar {
     width: 80px;
     background-color: var(--fourth);
