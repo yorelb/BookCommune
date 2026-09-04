@@ -13,25 +13,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedContainer = document.getElementById('booksFeed');
 
     // get books
-    fetch('/api/books/allBooks')
-        .then(response => {
+    Promise.all([
+        fetch('/api/books/allBooks').then(response => {
             if (!response.ok) throw new Error("Failed to load books");
             return response.json();
-        })
-        .then(books => {
+        }),
+        fetch(`/api/borrow/outgoing/${user.id}`).then(response => response.ok ? response.json() : [])
+    ])
+        .then(([books, outgoingRequests]) => {
+            const requestedBookIds = new Set(
+                outgoingRequests
+                    .filter(req => req.status === 'PENDING' || req.status === 'ACTIVE')
+                    .map(req => req.book.id)
+            );
+
             // Filter
             const availableBooks = books.filter(book => {
                 const bookCity = book.owner?.city || "Unknown";
-                return bookCity.toLowerCase() === user.city.toLowerCase();
+                const inSameCity = bookCity.toLowerCase() === user.city.toLowerCase();
+                const isNotOwnBook = book.owner?.id !== user.id;
+                return inSameCity && isNotOwnBook;
             });
 
             if (availableBooks.length === 0) {
                 feedContainer.innerHTML = `
-                    <div class="empty-state">
-                        <h3>No books found in ${userCity}</h3>
-                        <p>Be the first to list a book in your area!</p>
-                    </div>
-                `;
+                <div class="empty-state">
+                    <h3>No books found in ${userCity}</h3>
+                    <p>Be the first to list a book in your area!</p>
+                </div>
+            `;
                 return;
             }
 
@@ -43,22 +53,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 const imgUrl = book.bookImageUrl || book.img || "https://via.placeholder.com/300x450/5b8c85/ffffff?text=No+Cover+Available";
                 //const imgUrl = book.img || book.coverUrl || "https://via.placeholder.com/300x450/5b8c85/ffffff?text=No+Cover+Available";
 
+                const isAlreadyRequested = requestedBookIds.has(book.id);
+                const buttonHtml = isAlreadyRequested
+                    ? `<button class="borrow-btn" disabled style="background-color: #88BDA4;">Requested</button>`
+                    : `<button class="borrow-btn" onclick="requestBorrow(${book.id}, this)">Request to Borrow</button>`;
+
                 const card = document.createElement('div');
                 card.className = 'book-card';
                 card.innerHTML = `
-                    <img src="${imgUrl}" alt="${title} cover" class="book-cover">
-                    <h3 class="book-title" title="${title}">${title}</h3>
-                    <p class="book-author">${author}</p>
+                <img src="${imgUrl}" alt="${title} cover" class="book-cover">
+                <h3 class="book-title" title="${title}">${title}</h3>
+                <p class="book-author">${author}</p>
 
-                    <div class="book-meta">
-                        <span class="meta-tag">${condition}</span>
-                        <span class="book-owner">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                            ${owner}
-                        </span>
-                    </div>
-        
-                    <button class="borrow-btn" onclick="requestBorrow(${book.id}, this)">Request to Borrow</button>                `;
+                <div class="book-meta">
+                    <span class="meta-tag">${condition}</span>
+                    <span class="book-owner">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        ${owner}
+                    </span>
+                </div>
+    
+                ${buttonHtml}                `;
 
                 feedContainer.appendChild(card);
             });
@@ -66,11 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => {
             console.error("Error fetching feed:", error);
             feedContainer.innerHTML = `
-                <div class="empty-state">
-                    <h3>Oops! Could not load the library.</h3>
-                    <p>Our servers might be taking a quick nap. Try refreshing the page.</p>
-                </div>
-            `;
+            <div class="empty-state">
+                <h3>Oops! Could not load the library.</h3>
+                <p>Our servers might be taking a quick nap. Try refreshing the page.</p>
+            </div>
+        `;
         });
 });
 

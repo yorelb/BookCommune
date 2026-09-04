@@ -47,6 +47,15 @@ public class BorrowService {
             throw new IllegalArgumentException("You cannot borrow your own book.");
         }
 
+        //Cant borrow if requested
+        boolean alreadyRequested = borrowRepository.existsByBookIdAndBorrowerIdAndStatusIn(
+                bookId, borrowerId, java.util.Arrays.asList(BorrowStatus.PENDING, BorrowStatus.ACTIVE)
+        );
+
+        if (alreadyRequested) {
+            throw new IllegalArgumentException("You have already requested this book.");
+        }
+
         // Make the transaction
         BorrowRecord record = new BorrowRecord();
         record.setBook(book);
