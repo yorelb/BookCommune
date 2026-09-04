@@ -6,6 +6,21 @@
     --fourth: #ebf3e5;
 }
 
+.addBook-container {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.addBook-card {
+    background-color: var(--fourth);
+    border: 1px solid var(--third);
+    border-radius: 16px;
+    padding: 2.5rem;
+    width: 50%;
+
+}
+
 .form-wrapper {
     display: flex;
     justify-content: center;
