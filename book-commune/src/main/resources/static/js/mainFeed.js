@@ -48,10 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
             availableBooks.forEach(book => {
                 const title = book.title || "Untitled Book";
                 const author = book.author || "Unknown Author";
-                const condition = book.condition || "UNSPECIFIED";
+                const condition = formatStars(book.condition);
                 const owner = book.owner?.username ? `@${book.owner.username}` : "@Anonymous";
                 const imgUrl = book.bookImageUrl || book.img || "https://via.placeholder.com/300x450/5b8c85/ffffff?text=No+Cover+Available";
-                //const imgUrl = book.img || book.coverUrl || "https://via.placeholder.com/300x450/5b8c85/ffffff?text=No+Cover+Available";
 
                 const isAlreadyRequested = requestedBookIds.has(book.id);
                 const buttonHtml = isAlreadyRequested
@@ -110,4 +109,16 @@ async function requestBorrow(bookId, buttonElement) {
     } catch (error) {
         console.error("Error requesting book:", error);
     }
+}
+
+function formatStars(enumValue) {
+    if (!enumValue) return "UNSPECIFIED";
+    const starMap = {
+        'ONESTAR': '★',
+        'TWOSTAR': '★★',
+        'THREESTAR': '★★★',
+        'FOURSTAR': '★★★★',
+        'FIVESTAR': '★★★★★'
+    };
+    return starMap[enumValue.toUpperCase()] || enumValue;
 }
