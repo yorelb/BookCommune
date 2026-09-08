@@ -52,7 +52,7 @@ class BookControllerTest {
                 .andExpect(jsonPath("$.availability").value(true));
     }
 
-    // Get all books
+    // Get all available books
     @Test
     void testGetAllBooks_Success() throws Exception {
         Book book = new Book();
@@ -61,7 +61,7 @@ class BookControllerTest {
 
         when(bookService.findAllAvailableBooks()).thenReturn(List.of(book));
 
-        mockMvc.perform(get("/api/books"))
+        mockMvc.perform(get("/api/books/allBooks"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].title").value("1984"));
     }
