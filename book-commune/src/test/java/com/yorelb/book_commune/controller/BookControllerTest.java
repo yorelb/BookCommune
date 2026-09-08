@@ -15,6 +15,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(BookController.class)
@@ -66,17 +67,24 @@ class BookControllerTest {
                 .andExpect(jsonPath("$[0].title").value("Shadow Slave"));
     }
 
-    // Get all available books TODO: This needs proper testimg. Set one book to unavailable
+    // Get all available books
     @Test
     void testGetAllAvailableBooks_Success() throws Exception {
         Book book = new Book();
         book.setId(1L);
         book.setTitle("1984");
 
+        Book unavailableBook = new Book();
+        unavailableBook.setId(2L);
+        unavailableBook.setTitle("Shadow Slave");
+        unavailableBook.setAvailability(false);
+
         when(bookService.findAllAvailableBooks()).thenReturn(List.of(book));
 
         mockMvc.perform(get("/api/books/allBooks"))
                 .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$.size()").value(1))
                 .andExpect(jsonPath("$[0].title").value("1984"));
     }
 
