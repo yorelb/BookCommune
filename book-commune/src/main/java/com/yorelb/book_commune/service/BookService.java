@@ -27,6 +27,10 @@ public class BookService {
         this.userRepository = userRepository;
     }
 
+    public List<Book> findAllBooks() {
+        return bookRepository.findAll();
+    }
+
     public List<Book> findAllAvailableBooks() {
         return bookRepository.findByAvailableTrue();
     }

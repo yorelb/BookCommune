@@ -57,6 +57,20 @@ class BookControllerTest {
     void testGetAllBooks_Success() throws Exception {
         Book book = new Book();
         book.setId(1L);
+        book.setTitle("Shadow Slave");
+
+        when(bookService.findAllBooks()).thenReturn(List.of(book));
+
+        mockMvc.perform(get("/api/books"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].title").value("Shadow Slave"));
+    }
+
+    // Get all available books TODO: This needs proper testimg. Set one book to unavailable
+    @Test
+    void testGetAllAvailableBooks_Success() throws Exception {
+        Book book = new Book();
+        book.setId(1L);
         book.setTitle("1984");
 
         when(bookService.findAllAvailableBooks()).thenReturn(List.of(book));

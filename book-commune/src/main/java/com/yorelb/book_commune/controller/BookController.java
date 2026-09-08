@@ -31,9 +31,16 @@ public class BookController {
         }
     }
 
+    // list of all books
+    @GetMapping
+    public ResponseEntity<List<Book>> getAllBooks() {
+        List<Book> allBooks = bookService.findAllBooks();
+        return ResponseEntity.ok(allBooks);
+    }
+
     // list of all available books
     @GetMapping("/allBooks")
-    public ResponseEntity<List<Book>> getAllBooks() {
+    public ResponseEntity<List<Book>> getAllAvailableBooks() {
         List<Book> allBooks = bookService.findAllAvailableBooks();
         return ResponseEntity.ok(allBooks);
     }
