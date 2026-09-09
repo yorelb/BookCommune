@@ -12,6 +12,9 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import java.util.List;
 
 @WebMvcTest(BorrowController.class)
 class BorrowControllerTest {
@@ -72,5 +75,77 @@ class BorrowControllerTest {
         mockMvc.perform(post("/api/borrow/8/approve"))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$").value("Transaction not found."));
+    }
+
+    @Test
+    void testGetOutgoingRequests_Success() throws Exception {
+        BorrowRecord record = new BorrowRecord();
+        record.setId(1L);
+        record.setStatus(BorrowStatus.PENDING);
+
+        when(borrowService.getOutgoingRequests(2L)).thenReturn(List.of(record));
+
+        mockMvc.perform(get("/api/borrow/outgoing/2"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.size()").value(1))
+                .andExpect(jsonPath("$[0].id").value(1));
+    }
+
+    @Test
+    void testGetOutgoingRequests_Fail() throws Exception {
+        when(borrowService.getOutgoingRequests(99L))
+                .thenThrow(new RuntimeException("Database error"));
+
+        mockMvc.perform(get("/api/borrow/outgoing/99"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Database error"));
+    }
+
+    @Test
+    void testGetIncomingRequests_Success() throws Exception {
+        BorrowRecord record = new BorrowRecord();
+        record.setId(3L);
+        record.setStatus(BorrowStatus.ACTIVE);
+
+        when(borrowService.getIncomingRequests(5L)).thenReturn(List.of(record));
+
+        mockMvc.perform(get("/api/borrow/incoming/5"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.size()").value(1))
+                .andExpect(jsonPath("$[0].id").value(3));
+    }
+
+    @Test
+    void testGetIncomingRequests_Fail() throws Exception {
+        when(borrowService.getIncomingRequests(99L))
+                .thenThrow(new RuntimeException("Database error"));
+
+        mockMvc.perform(get("/api/borrow/incoming/99"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Database error"));
+    }
+
+    @Test
+    void testRejectedBorrow_Success() throws Exception {
+        BorrowRecord mockRecord = new BorrowRecord();
+        mockRecord.setId(7L);
+        mockRecord.setStatus(BorrowStatus.REJECTED);
+
+        when(borrowService.denyBorrowRequest(7L)).thenReturn(mockRecord);
+
+        mockMvc.perform(post("/api/borrow/7/deny"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(7))
+                .andExpect(jsonPath("$.status").value("REJECTED"));
+    }
+
+    @Test
+    void testDenyBorrow_Fail() throws Exception {
+        when(borrowService.denyBorrowRequest(8L))
+                .thenThrow(new IllegalArgumentException("Transaction not found."));
+
+        mockMvc.perform(post("/api/borrow/8/deny"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Transaction not found."));
     }
 }
